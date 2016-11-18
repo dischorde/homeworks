@@ -42,11 +42,10 @@ class Map
 
   def assign(key, value)
     pair_idx = lookup_index(key)
-    previous_vals = @map[pair_idx]
-    if previous_vals.nil?
+    if pair_idx.nil?
       @map << [key, [value]]
     else
-      new_values = previous_vals << value
+      new_values = @map[pair_idx].last << value
       @map[pair_idx] = [key, new_values]
     end
   end
@@ -64,7 +63,7 @@ class Map
   end
 
   def show
-    deep_dup(@map)
+    @map.dup
   end
 
   private
@@ -74,7 +73,7 @@ class Map
   end
 
   def deep_dup(arr)
-    arr.map { |el| el.is_a? Array ? deep_dup(arr) : el }
+    arr.map { |el| el.is_a?(Array) ? deep_dup(el): el }
   end
 
 end

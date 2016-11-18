@@ -63,12 +63,18 @@ class Map
     @map.delete_at(pair_idx)
   end
 
+  def show
+    deep_dup(@map)
+  end
+
+  private
+
   def lookup_index(key)
     @map.find_index { |pair| pair.first == key }
   end
 
-  def show
-    @map.dup
+  def deep_dup(arr)
+    arr.map { |el| el.is_a? Array ? deep_dup(arr) : el }
   end
 
 end

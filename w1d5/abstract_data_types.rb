@@ -41,12 +41,12 @@ class Map
   end
 
   def assign(key, value)
-    previous_vals = lookup(key)
+    pair_idx = lookup_index(key)
+    previous_vals = @map[pair_idx]
     if previous_vals.nil?
       @map << [key, [value]]
     else
       new_values = previous_vals << value
-      pair_idx = @map.find_index([key, previous_vals])
       @map[pair_idx] = [key, new_values]
     end
   end

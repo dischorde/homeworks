@@ -63,7 +63,7 @@ class Map
   end
 
   def show
-    @map.dup
+    deep_dup(@map)
   end
 
   private

@@ -1,3 +1,5 @@
+require 'byebug'
+
 class Simon
   COLORS = %w(red blue green yellow)
 
@@ -27,34 +29,34 @@ class Simon
   end
 
   def show_sequence
-    system("clear")
     add_random_color
     puts "Sequence is: #{@seq.join('  ')}"
+    sleep(2)
+    system("clear")
   end
 
   def require_sequence
-    sleep(2)
     guess = nil
     prompt_for_input
     until is_valid?(guess)
-      puts "Invalid response. Try again with proper formatting."
+      puts "Invalid response. Try again with proper formatting." if guess
       guess = gets.chomp.split
     end
-    @game_over = is_correct?(guess)
+    @game_over = is_wrong?(guess)
   end
 
   def prompt_for_input
-    system("clear")
     puts "What was the sequence? Guess colors with spaces between each color."
     puts "For example: red blue blue green red yellow"
   end
 
-  def is_correct?(guess)
-    guess == @seq
+  def is_wrong?(guess)
+    guess != @seq
   end
 
   def is_valid?(sequence)
-    sequence.is_a? Array && sequence.all? { |color| COLORS.include?(color) }
+    return false unless sequence
+    sequence.is_a?(Array) && sequence.all? { |color| COLORS.include?(color) }
   end
 
   def add_random_color
@@ -66,7 +68,7 @@ class Simon
   end
 
   def game_over_message
-    puts "Game over :( Best sequence was #{sequence_length} colors."
+    puts "Game over :( Sequence was #{@seq.join('  ')}."
   end
 
   def reset_game
@@ -74,4 +76,9 @@ class Simon
     @sequence_length = 1
     @seq = []
   end
+end
+
+if __FILE__ == $PROGRAM_NAME
+  simon = Simon.new
+  simon.play
 end

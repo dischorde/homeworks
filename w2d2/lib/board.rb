@@ -18,13 +18,13 @@ class Board
   end
 
   def valid_move?(start_pos)
-    raise "Invalid starting cup" unless start_pos.between?(1, 12)
+    raise "Position is empty!" if @cups[start_pos].length < 1
+    raise "Invalid starting cup" unless start_pos.between?(0, 12)
     true
   end
 
   def make_move(start_pos, current_player_name)
     opponent_store = (current_player_name == @name1 ? 13 : 6)
-    #byebug if start_pos == 12
 
     stones = @cups[start_pos]
     @cups[start_pos] = []

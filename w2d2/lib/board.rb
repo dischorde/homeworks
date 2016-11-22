@@ -37,7 +37,7 @@ class Board
       @cups[next_cup] << stones.shift
     end
 
-    #render
+    render
     next_turn(next_cup)
   end
 
@@ -60,8 +60,11 @@ class Board
   end
 
   def one_side_empty?
+    @cups[0...6].flatten.empty? || @cups[7..12].flatten.empty?
   end
 
   def winner
+    return :draw if @cups[6].length == @cups[13].length
+    @cups[6].length > @cups[13].length ? @name1 : @name2
   end
 end

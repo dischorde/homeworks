@@ -35,12 +35,18 @@ describe Dessert do
     end
   end
 
-  # describe "#mix!" do
-  #   let(:previous_configuration) { gelato.ingredients }
-  #   it "shuffles the ingredient array" do
-  #     expect(gelato.mix!).to_not eq(previous_configuration)
-  #   end
-  # end
+  describe "#mix!" do
+    it "shuffles the ingredient array" do
+        ingredients = ["chocolate", "egg", "milk" "sugar", "butter"]
+
+        ingredients.each { |ingredient| gelato.add_ingredient(ingredient) }
+
+        expect(gelato.ingredients).to eq(ingredients)
+        gelato.mix!
+        expect(gelato.ingredients).not_to eq(ingredients)
+        expect(gelato.ingredients.sort).to eq(ingredients.sort)
+    end
+  end
 
   describe "#eat" do
     it "subtracts an amount from the quantity" do
@@ -60,12 +66,11 @@ describe Dessert do
     end
   end
 
-  # describe "#make_more" do
-  #   it "calls bake on the dessert's chef with the dessert passed in" do
-  #     allow(chef).to receive(:bake).with(self)
-  #     gelato.make_more
-  #     expect(chef).to_receive(:bake).with(self)
-  #   end
-  # end
+  describe "#make_more" do
+    it "calls bake on the dessert's chef with the dessert passed in" do
+      expect(chef).to receive(:bake).with(gelato)
+      gelato.make_more
+    end
+  end
 
 end

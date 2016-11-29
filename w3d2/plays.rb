@@ -29,12 +29,15 @@ class Play
       WHERE
         title = ?
     SQL
-    data.map { |datum| Play.new(datum) }.first
+    return nil unless data.length > 0
+    Play.new(data.first)
   end
 
   def self.find_by_playwright(name)
-    writer_id = Playwright.find_id(name)
-    data = PlayDBConnection.instance.execute(<<-SQL, writer_id)
+    writer = Playwright.find_by_name(name)
+    raise "#{name} not found in DB" unless playwright
+
+    data = PlayDBConnection.instance.execute(<<-SQL, writer.id)
       SELECT
         *
       FROM
@@ -80,6 +83,7 @@ end
 
 class Playwright
   attr_accessor :name, :birth_year
+  attr_reader :id
 
 
   def self.all
@@ -96,19 +100,9 @@ class Playwright
     WHERE
       name = ?
     SQL
-    data.map { |datum| Playwright.new(datum) }.first
-  end
 
-  def self.find_id(name)
-    data = PlayDBConnection.instance.execute(<<-SQL, name)
-    SELECT
-      id
-    FROM
-      playwrights
-    WHERE
-      name = ?
-    SQL
-    data.first["id"]
+    return nil if data.empty?
+    Playwright.new(data.first)
   end
 
   def initialize(options)

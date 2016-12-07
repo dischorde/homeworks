@@ -60,6 +60,34 @@
         </ol>
       </section>
 
+      <section>
+        <h1>Reviews</h1>
+        <form action="/reviews" method="post">
+          <label for="reviewer">Name</label>
+          <input id="reviewer" type="text" name="name">
+
+          <label for="rating">Rating</label>
+          1<input type="radio" name="rating" value="1" checked >
+          2<input type="radio" name="rating" value="2">
+          3<input type="radio" name="rating" value="3">
+          4<input type="radio" name="rating" value="4">
+          5<input type="radio" name="rating" value="5">
+
+          <label for="expertise">Cooking Expertise</label>
+          <select name="expertise">
+            <option disabled selected>Select Cooking Expertise</option>
+            <option value="Sometimes Cook">Sometimes Cook</option>
+            <option value="Cook Everyday">Cook Everyday</option>
+            <option value="Cooking is a Hobby">Cooking is a Hobby</option>
+            <option value="Professional Chef">Professional Chef</option>
+          </select><br>
+
+          <label> Review <br><textarea name="review"></textarea> </label><br>
+          <input type="submit" value="Submit Review!">
+
+        </form>
+      </section>
+
       <footer> <p> Original Recipe by Joanna Cismaru on <a href="http://www.jocooks.com/main-courses/pork-main-courses/korean-style-pork-chops/">Jo Cooks</a>,
       found on Pinterest. </p></footer>
 

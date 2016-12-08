@@ -2,3 +2,7 @@
 
 <%= render "shared/errors" %>
 <%= render "form", cat: @cat %>
+
+<% content_for :footer do %>
+  <h6>This is the new cat page.</h6>
+<% end %>

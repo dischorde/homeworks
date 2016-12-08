@@ -29,3 +29,7 @@
     <%= render "req_tr", req: req, cat: @cat %>
   <% end %>
 </table>
+
+<% content_for :footer do %>
+  <h6>This is <%= @cat.name %>'s page.</h6>
+<% end %>

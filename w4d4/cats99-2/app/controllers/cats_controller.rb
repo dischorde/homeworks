@@ -51,7 +51,7 @@ class CatsController < ApplicationController
 
   def confirm_owns_cat
     @cat = Cat.find(params[:id])
-    unless current_user.cats.exists?(@cat)
+    unless current_user && current_user.cats.exists?(@cat)
       redirect_to cat_url(@cat)
     end
   end

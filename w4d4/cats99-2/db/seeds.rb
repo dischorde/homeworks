@@ -13,7 +13,7 @@ Cat.create!(name: 'Storm', color: 'black', sex: 'M', birth_date: "2006/09/13", u
 Cat.create!(name: 'Sasha', color: 'brown', sex: 'F', birth_date: "1985/10/13", user_id: 3)
 Cat.create!(name: 'Snowball', color: 'white', sex: 'F', birth_date: "2012/01/20", user_id: 1)
 Cat.create!(name: 'Kitty Chaos', color: 'orange', sex: 'F', birth_date: "1990/06/05", user_id: 1)
-Cat.create!(name: 'Cheeto', color: 'orange', sex: 'M', birth_date: "2015/03/30", user_id: 2)
+Cat.create!(name: 'Cheeto', color: 'orange', sex: 'M', birth_date: "2013/05/05", user_id: 4)
 
 CatRentalRequest.create!(cat_id: 7, start_date: '1/2/2013', end_date: '5/2/2013', user_id: 1)
 CatRentalRequest.create!(cat_id: 2, start_date: '2/1/2015', end_date: '2/3/2015', user_id: 1)
@@ -26,3 +26,4 @@ CatRentalRequest.create!(cat_id: 9, start_date: '1/2/2015', end_date: '1/5/2015'
 User.create!(user_name: 'michael', password: 'password')
 User.create!(user_name: 'dischorde', password: 'hunter2')
 User.create!(user_name: 'katarina', password: 'abc123')
+User.create!(user_name: 'hunter', password: 'wompyy')

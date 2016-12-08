@@ -1,6 +1,6 @@
 <h1>Log In!</h1>
 <form action="/sessions" method="post">
-  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+<%= auth_token %>
   <label for="username">Username: </label>
   <input id="username" type="text" name="user[user_name]">
   <br><br>
@@ -11,3 +11,7 @@
 </form>
 <br>
 <%= link_to "Make new user", new_user_url %>
+
+<% content_for :footer do %>
+  <h6>This is login page.</h6>
+<% end %>

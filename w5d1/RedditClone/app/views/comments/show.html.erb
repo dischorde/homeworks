@@ -1,0 +1,14 @@
+<h1><%= @comment.title %></h1>
+<p><%= @comment.content %></p>
+
+<%= link_to 'Edit post', edit_post_url %>
+
+<h3>Comments</h3>
+
+<% @comment.child_comments.each do |comment| %>
+  <p><%= link_to comment.content, comment_url(comment) %></p>
+  <p>Authored By: <%= comment.author.username %></p>
+<% end %>
+
+<h3>Add a comment:</h3>
+<%= render 'form', comment: @comment %>

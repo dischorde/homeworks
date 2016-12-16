@@ -1,0 +1,41 @@
+@import url('https://fonts.googleapis.com/css?family=Space+Mono');
+
+body {
+  font-family: "Arial, sans-serif";
+  background-color: darksalmon;
+}
+
+h1 {
+  font-size: 38px;
+}
+
+h2 {
+  font-size: 32px;
+}
+
+.ingredients-list {
+  list-style: square inside;
+}
+
+ol {
+  list-style: armenian inside;
+}
+
+header > img {
+  width: 100px;
+}
+
+ul li a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.user_review h4 {
+  font-family: 'Arial', sans-serif;;
+  font-variant: small-caps;
+  font-weight: bold;
+}
+
+.user_review {
+  font-family: 'Space Mono', monospace;
+}

@@ -81,8 +81,8 @@ View.prototype.exercise7 = function(){
   //console. The color won't be the color's name, but its rbg value.
   //You should push the button for exercise 6 first to try it on the
   //rainbow.
-  $('#easel').on("mouseenter", ".square", el => {
-    let square = $(el.currentTarget);
+  $('#easel').on("mouseenter", ".square", event => {
+    let square = $(event.currentTarget);
     let rgbVal = square.css("background-color");
     console.log(rgbVal);
   });

@@ -1,8 +1,10 @@
 @import url('https://fonts.googleapis.com/css?family=Space+Mono');
 
 body {
-  font-family: "Arial, sans-serif";
+  font-family: "Arial", sans-serif;
   background-color: darksalmon;
+  width: 80%;
+  margin: 0 auto;
 }
 
 h1 {
@@ -23,6 +25,29 @@ ol {
 
 header > img {
   width: 100px;
+  display: inline-block;
+  float: left;
+}
+
+nav {
+  float: right;
+}
+
+.ingredients-list li {
+  margin: 15px 0;
+}
+
+ol li {
+  margin: 15px 0;
+}
+
+nav ul li {
+  display: inline-block;
+}
+
+nav ul li a {
+  padding: 20px;
+  display: block
 }
 
 ul li a {
@@ -38,6 +63,7 @@ ul li a {
 
 .user_review {
   font-family: 'Space Mono', monospace;
+  display: block;
 }
 
 input[type="radio"], input[type="submit"], select  {
@@ -57,6 +83,15 @@ input[type="radio"]:checked {
   background-position: 30px 30px;
 }
 
+input[type="text"], select {
+  display: block;
+  width: 175px
+}
+
+textarea {
+  width: 175px
+}
+
 input:last-child {
   background-color: gold;
 }
@@ -71,4 +106,16 @@ ol li:nth-of-type(2n) {
 
 h2 + .user_review {
     border-top: 1px solid black;
+}
+
+section {
+  display: inline-block;
+}
+
+aside {
+  display: inline-block;
+}
+
+footer {
+  text-align: center;
 }

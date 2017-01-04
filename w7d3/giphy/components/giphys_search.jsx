@@ -16,7 +16,6 @@ class GiphysSearch extends React.Component {
   }
 
   handleChange(e) {
-    console.log(e.currentTarget.value);
     this.setState({ searchTerm: e.currentTarget.value});
   }
 

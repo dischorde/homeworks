@@ -64,16 +64,10 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	// import { receiveSearchGiphys, fetchSearchGiphys } from './actions/giphy_actions.js';
-	
-	
 	document.addEventListener("DOMContentLoaded", function () {
-	  // window.fetchSearchGiphys = fetchSearchGiphys;
-	  // window.receiveSearchGiphys = receiveSearchGiphys;
 	  var store = (0, _store2.default)();
 	  var root = document.getElementById('root');
 	  _reactDom2.default.render(_react2.default.createElement(_root2.default, { store: store }), root);
-	  // window.store = store;
 	});
 
 /***/ },
@@ -22267,7 +22261,6 @@
 	  }, {
 	    key: 'handleChange',
 	    value: function handleChange(e) {
-	      console.log(e.currentTarget.value);
 	      this.setState({ searchTerm: e.currentTarget.value });
 	    }
 	  }, {
@@ -22312,21 +22305,24 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var GiphysIndex = function GiphysIndex(_ref) {
-	  var giphys = _ref.giphys;
-	
-	  var lis = giphys.map(function (giphy, i) {
+	var giphysIndexItems = function giphysIndexItems(giphys) {
+	  return giphys.map(function (giphy, i) {
 	    return _react2.default.createElement(
 	      'li',
 	      { key: i },
 	      _react2.default.createElement('img', { src: giphy.images.fixed_height.url })
 	    );
 	  });
+	};
+	
+	var GiphysIndex = function GiphysIndex(_ref) {
+	  var giphys = _ref.giphys;
+	
 	
 	  return _react2.default.createElement(
 	    'ul',
 	    null,
-	    lis
+	    giphysIndexItems(giphys)
 	  );
 	};
 	

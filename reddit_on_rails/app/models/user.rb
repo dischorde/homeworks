@@ -5,6 +5,12 @@ class User < ApplicationRecord
   attr_reader :password
   after_initialize :ensure_session_token
 
+  has_many :subs,
+           primary_key: :id,
+           foreign_key: :moderator_id,
+           class_name: :Sub,
+           inverse_of: :moderator
+
   def self.find_by_credentials(name, password)
     user = User.find_by(name: name)
     user.try(:is_password?, password) ? user : nil

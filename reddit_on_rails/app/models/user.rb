@@ -12,10 +12,16 @@ class User < ApplicationRecord
            inverse_of: :moderator
 
   has_many :posts,
-            foreign_key: :user_id,
-            primary_key: :id,
-            class_name: :Post,
-            inverse_of: :author
+           foreign_key: :user_id,
+           primary_key: :id,
+           class_name: :Post,
+           inverse_of: :author
+
+  has_many :comments,
+           foreign_key: :user_id,
+           primary_key: :id,
+           class_name: :Comment,
+           inverse_of: :author
 
   def self.find_by_credentials(name, password)
     user = User.find_by(name: name)

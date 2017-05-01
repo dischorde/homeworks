@@ -5,6 +5,8 @@ class User < ApplicationRecord
   attr_reader :password
   after_initialize :ensure_session_token
 
+  has_many :votes
+
   has_many :subs,
            primary_key: :id,
            foreign_key: :moderator_id,

@@ -4,8 +4,17 @@ Rails.application.routes.draw do
   resources :users, only: [:new, :create]
   resource :session, only: [:new, :create, :destroy]
   resources :subs, except: [:destroy]
-  resources :comments, only: [:create, :show]
+  resources :comments, only: [:create, :show] do
+    member do
+      post "upvote"
+      post "downvote"
+    end
+  end
   resources :posts, except: [:destroy, :index] do
     resources :comments, only: [:new]
+    member do
+      post "upvote"
+      post "downvote"
+    end
   end
 end

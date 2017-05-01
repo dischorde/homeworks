@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   before_action :require_signed_in!, except: [:show]
-  before_action :find_post, only: [:show, :edit, :update]
+  before_action :find_post, except: [:new, :create]
   before_action :require_ownership, only: [:edit, :update]
 
   def show
@@ -35,6 +35,14 @@ class PostsController < ApplicationController
     end
   end
 
+  def downvote
+    vote(-1)
+  end
+
+  def upvote
+    vote(1)
+  end
+
   private
 
   def find_post
@@ -48,5 +56,15 @@ class PostsController < ApplicationController
 
   def post_params
     params.require(:post).permit(:url, :title, :content, sub_ids: [])
+  end
+
+  def vote(val)
+    @user_vote = @post.votes.find_or_initialize_by(user: current_user)
+
+    unless @user_vote.update(value: val)
+      flash[:errors] = @user_vote.errors.full_messages
+    end
+
+    redirect_to post_url(@post)
   end
 end

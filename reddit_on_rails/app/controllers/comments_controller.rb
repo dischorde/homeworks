@@ -1,5 +1,6 @@
 class CommentsController < ApplicationController
   before_action :require_signed_in!, only: [:new, :create]
+  before_action :find_comment, except: [:new, :create]
 
   def new
     @comment = Comment.new(post_id: params[:post_id])
@@ -19,10 +20,16 @@ class CommentsController < ApplicationController
   end
 
   def show
-    @comment = Comment.find(params[:id])
     @new_comment = Comment.new(parent_comment_id: @comment.id)
-
     render :show
+  end
+
+  def upvote
+    vote(1)
+  end
+
+  def downvote
+    vote(-1)
   end
 
   private
@@ -31,4 +38,17 @@ class CommentsController < ApplicationController
     params.require(:comment).permit(:body, :post_id, :parent_comment_id)
   end
 
+  def find_comment
+    @comment = Comment.find(params[:id])
+  end
+
+  def vote(val)
+    @user_vote = @comment.votes.find_or_initialize_by(user: current_user)
+
+    unless @user_vote.update(value: val)
+      flash[:errors] = @user_vote.errors.full_messages
+    end
+
+    redirect_to comment_url(@comment)
+  end
 end

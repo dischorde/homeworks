@@ -37,7 +37,7 @@ class PostsController < ApplicationController
 
   private
 
-  def find_sub
+  def find_post
     @post = Post.find(params[:id])
   end
 
@@ -47,6 +47,6 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(:url, :title, :content, :sub_id)
+    params.require(:post).permit(:url, :title, :content, sub_ids: [])
   end
 end

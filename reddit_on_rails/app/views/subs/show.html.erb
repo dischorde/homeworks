@@ -11,7 +11,7 @@
 
   <ul>
     <% @sub.posts.each do |post| %>
-      <li>(<%= post.votes %>) <%= link_to post.title, post %></li>
+      <li>(<%#= post.votes %>) <%= link_to post.title, post %></li>
     <% end %>
   </ul>
 

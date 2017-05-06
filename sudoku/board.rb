@@ -1,5 +1,4 @@
 require 'set'
-require 'byebug'
 require_relative 'tile'
 
 class Board
@@ -35,7 +34,29 @@ class Board
     rows_solved? && columns_solved? && squares_solved?
   end
 
+  def valid_pos?(pos)
+    row, col = pos
+    row.between?(0, 8) && col.between?(0, 8)
+  end
+
+  def valid_value?(val)
+    val.between?(1, 9)
+  end
+
+  def render
+    puts " |  " + (0..8).to_a.join("  |  ") + "   "
+    puts horizontal_divider
+    @grid.each_with_index do |row, idx|
+      puts "#{idx}|  " + row.join("  |  ") + "  "
+      puts horizontal_divider
+    end
+  end
+
   private
+
+  def horizontal_divider
+    "-------------------------------------------------------"
+  end
 
   def squares_solved?
     (0..8).step(3) do |row_pos|
@@ -87,6 +108,3 @@ class Board
     section.length == 9
   end
 end
-
-b = Board.from_file("puzzles/sudoku3.txt")
-puts b.solved?

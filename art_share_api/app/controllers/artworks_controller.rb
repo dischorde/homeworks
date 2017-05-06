@@ -2,7 +2,7 @@ class ArtworksController < ApplicationController
   before_action :find_artwork, except: [:index, :create]
 
   def index
-    @artworks = Artwork.all
+    @artworks = Artwork.find_owned_and_shared(params[:user_id])
     render json: @artworks
   end
 

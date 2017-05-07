@@ -25,9 +25,9 @@ class Dealer < Player
 
   def pay_bets
     @bets.each do |player, bet|
-      if player.hand.beats?(@hand)
-        player.pay_winnings(2 * bet)
-      end
+      player.pay_winnings(2 * bet) if player.hand.beats?(@hand)
     end
+
+    nil
   end
 end

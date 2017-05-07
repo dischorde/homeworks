@@ -4,13 +4,9 @@ require_relative 'card'
 class Deck
   # Returns an array of all 52 playing cards.
   def self.all_cards
-    all_cards = []
-    Card.suits.each do |suit|
-      Card.values.each do |value|
-        all_cards << Card.new(suit, value)
-      end
+    Card.suits.product(Card.values).map do |suit, value|
+      Card.new(suit, value)
     end
-    all_cards
   end
 
   def initialize(cards = Deck.all_cards)
@@ -25,9 +21,7 @@ class Deck
   # Takes `n` cards from the top of the deck.
   def take(n)
     raise "not enough cards" if n > count
-    taken = @cards.take(n)
-    @cards = @cards.drop(n)
-    taken
+    @cards.shift(n)
   end
 
   # Returns an array of cards to the bottom of the deck.

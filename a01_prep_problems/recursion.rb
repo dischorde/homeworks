@@ -25,8 +25,36 @@ end
 def exponent(b, n)
 end
 
+
 # make better change problem from class
 def make_better_change(value, coins)
+  better_change_helper(value, coins, {})
+end
+
+def better_change_helper(value, coins, cache)
+  # return it if it's already in the cache
+  return cache[value] if cache.key?(value)
+  best_coins = nil
+
+  coins.each do |coin|
+    next if coin > value # try next if this coin is too big
+
+    # if this coin is the same value, return and cache it
+    if coin == value
+      cache[value] = [coin]
+      return [coin]
+    end
+
+    # otherwise, get best other coins to use if you use this one
+    prev_coins = better_change_helper(value - coin, coins, cache)
+    next if prev_coins.nil?
+
+    cur_coins = prev_coins + [coin]
+    best_coins = cur_coins unless best_coins && cur_coins.length > best_coins.length
+  end
+
+  cache[value] = best_coins if best_coins
+  best_coins
 end
 
 #deep dup question from class

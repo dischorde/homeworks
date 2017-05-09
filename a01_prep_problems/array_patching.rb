@@ -2,26 +2,61 @@ require 'byebug'
 class Array
 
   def my_each(&prc)
+    self.length.times do |idx|
+      prc.call(self[idx])
+    end
+    self
   end
 
   def my_each_with_index(&prc)
+    self.length.times do |idx|
+      prc.call(self[idx], idx)
+    end
+    self
   end
 
   def my_select(&prc)
+    selected = []
+    self.my_each do |el|
+      selected << el if prc.call(el)
+    end
+    selected
   end
 
   def my_reject(&prc)
+    rejected = []
+    self.my_each do |el|
+      rejected << el unless prc.call(el)
+    end
+    rejected
   end
 
   def my_any?(&prc)
+    self.my_each do |el|
+      return true if prc.call(el)
+    end
+    false
   end
 
   def my_all?(&prc)
+    self.my_each do |el|
+      return false unless prc.call(el)
+    end
+    true
   end
 
   # Takes a multi-dimentional array and returns a single array of all the elements
   # [1,[2,3], [4,[5]]].my_controlled_flatten(1) => [1,2,3,4,5]
   def my_flatten
+    flattened = []
+    self.my_each do |el|
+      if el.is_a? Array
+        flattened += el.my_flatten
+      else
+        flattened << el
+      end
+    end
+    flattened
   end
 
   # Write a version of flatten that only flattens n levels of an array.
@@ -31,9 +66,33 @@ class Array
   #
   # [1,[2,3], [4,[5]]].my_controlled_flatten(1) => [1,2,3,4,[5]]
   def my_controlled_flatten(n)
+    flattened = []
+    self.my_each do |el|
+      if n > 0 && el.is_a?(Array)
+        flattened += el.my_controlled_flatten(n - 1)
+      else
+        flattened << el
+      end
+    end
+    flattened
   end
 
   def my_zip(*arrs)
+    idx = 0
+    zipped = []
+
+    loop do
+      at_idx = (idx < self.length ? [self[idx]] : [])
+      arrs.each do |arr|
+        next unless idx < arr.length
+        at_idx << arr[idx]
+      end
+      break if at_idx.empty?
+      zipped << at_idx
+      idx += 1
+    end
+
+    zipped
   end
 
   def my_rotate(num = 1)

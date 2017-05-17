@@ -38,7 +38,7 @@ describe('BenchesReducer', () => {
 
     beforeEach(() => {
       emptyState = {};
-      testBenches = [bench1, bench2];
+      testBenches = { 1: bench1, 2: bench2 };
       action = {
         type: 'RECEIVE_BENCHES',
         benches: testBenches
@@ -53,5 +53,28 @@ describe('BenchesReducer', () => {
       BenchesReducer(emptyState, action);
       expect(emptyState).toEqual({});
     });
+  });
+
+  describe('handling the RECEIVE_BENCH action', () => {
+    let action,
+        emptyState;
+
+    beforeEach(() => {
+      emptyState = {};
+      action = {
+        type: 'RECEIVE_BENCH',
+        bench: bench1
+      };
+    });
+
+    test('should add the bench to the state nested under bench id', () => {
+      expect(BenchesReducer(emptyState, action)[1]).toEqual(bench1)
+    });
+
+    test('should not modify the old state', () => {
+      BenchesReducer(emptyState, action);
+      expect(emptyState).toEqual({});
+    });
+
   });
 });
